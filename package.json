@@ -1,0 +1,21 @@
+{
+  "name": "flipcoin",
+  "version": "1.0.0",
+  "description": "OOP flipcoin program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Flip_coin"
+  },
+  "keywords": [
+    "oop"
+  ],
+  "author": "choudel",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
+}
