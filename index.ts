@@ -1,5 +1,5 @@
 class Coin{
-    public coinOption:string= "";
+    private coinOption:string= "";
     public coinValue:string[]=["heads","tails"];
 
     constructor(){
@@ -23,48 +23,55 @@ class Player{
         return this.coinOption
     }
     public setCoinOption(opponnentFlip:string):void{
-        this.coinOption=(opponnentFlip=="heads")?"tails":"heads";
-
+        if (opponnentFlip==='tails') { this.coinOption= 'heads'} else { this.coinOption='tails'} 
     }
     public getRandCoinOption():string{
         let randnum:number= newFunction();
+        console.log(randnum)
         this.coinOption=this.coinValue[randnum];
+        console.log(this.coinOption)
         return this.coinOption
     }
     public didPlayerWin(winningFlip:string):void{
         if (this.coinOption==winningFlip){
-            console.log(Player.name+"won the filp of "+this.coinOption)
+            console.log(this.name+" won the flip of " + this.coinOption)
         }else{
-            console.log(Player.name+"lost the filp of "+this.coinOption)
+            console.log(this.name+" lost the flip of "+ this.coinOption)
         }
     }
 
 }
 class CoinGame{
-    public players:Player[]= [new Player("hello"), new Player("start")];
+    public players:Player[]= [new Player(""),new Player("")];
 
     public theCoin:Coin= new Coin();
 
-    public CoinGame(player1Name:string,player2Name:string){
+    public constructor(player1Name:string,player2Name:string){
         this.players=[new Player(player1Name),new Player(player2Name)] 
     }
+    
     public startGame():void{
+        console.log(this.players)
         let randindex: number = newFunction();
-        let playersPick:string = this.players[randindex].getRandCoinOption();
-        let opponnentIndex:number=(randindex==0)?1:0
-        this.players[opponnentIndex].setCoinOption(playersPick)
+        let playersPick:Player = this.players[randindex]
+        console.log(playersPick)
+        playersPick.getRandCoinOption()
+        function opposit(randindex):number {if (randindex==0) {return 1} else {return 0} }
+        let opponnentIndex:number= opposit(randindex)
+        console.log (opponnentIndex)
+        this.players[opponnentIndex].setCoinOption(playersPick.coinOption)
         let winningFlip= this.theCoin.getCoinOption()
-        this.players[0].didPlayerWin(winningFlip)
-        this.players[1].didPlayerWin(winningFlip)
+        this.players[randindex].didPlayerWin(winningFlip)
+        this.players[opponnentIndex].didPlayerWin(winningFlip)
     }
 }
 
-const played = new CoinGame();
-played.CoinGame("choudel","john");
+const played = new CoinGame("choudel","john");
+
 played.startGame()
 function newFunction() {
     let randindex: number = Math.random();
-    randindex < 0.5 ? 0 : 1;
+    randindex < 0.5 ? randindex= 0 : randindex=1;
     return randindex;
 }
 
